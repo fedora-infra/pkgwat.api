@@ -5,4 +5,4 @@ pkgwat.api
 
 .. comment: split here
 
-Python API for `pkgwat <http://pypi.python.org/pypi/pkgwat>`_.
+Python API for `pkgwat <http://pypi.python.org/pypi/pkgwat.cli>`_.
