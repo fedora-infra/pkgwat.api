@@ -3,12 +3,12 @@ import collections
 import json
 import requests
 
-import pkgwat
-import pkgwat.utils
+import pkgwat.api
+import pkgwat.api.utils
 
 import requests.defaults
 requests.defaults.defaults['base_headers']['User-Agent'] = \
-        'pkgwat/' + pkgwat.__version__
+        'pkgwat/' + pkgwat.api.__version__
 
 
 # TODO -- Tie this into cliff's verbosity options
@@ -83,7 +83,7 @@ def _make_request(path, query, strip_tags):
     d = json.loads(response.text)
 
     if strip_tags:
-        d = pkgwat.utils.strip_tags(d)
+        d = pkgwat.api.utils.strip_tags(d)
 
     return d
 
@@ -160,7 +160,8 @@ def updates(package, release="all", status="all", rows_per_page=10,
     return _make_request(path, query, strip_tags)
 
 
-def bugs(package, release="all", rows_per_page=10, start_row=0, strip_tags=True):
+def bugs(package, release="all", rows_per_page=10,
+         start_row=0, strip_tags=True):
 
     if release not in bugzilla_releases.values():
         release = bugzilla_releases[release]
@@ -200,7 +201,7 @@ def contents(package, arch="x86_64", release="Rawhide", strip_tags=True):
     d = response.json
 
     if strip_tags:
-        d = pkgwat.utils.strip_tags(d)
+        d = pkgwat.api.utils.strip_tags(d)
 
     return d
 

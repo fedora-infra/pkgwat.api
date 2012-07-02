@@ -24,32 +24,11 @@ except ImportError:
 
 requires = [
     'six',  # For python3 support
-    'cliff',
     'requests',
 ]
 
-subcommands = [
-    'search = pkgwat.subcommands:Search',
-    'info = pkgwat.subcommands:Info',
-    'releases = pkgwat.subcommands:Releases',
-    'builds = pkgwat.subcommands:Builds',
-    'updates = pkgwat.subcommands:Updates',
-    'bugs = pkgwat.subcommands:Bugs',
-    'contents = pkgwat.subcommands:Contents',
-    'changelog = pkgwat.subcommands:Changelog',
-]
 
-if sys.version_info[0] == 2:
-    # TODO -- Now accepting volunteers to port fabulous to Python 3
-    requires.extend([
-        'fabulous',
-        'PIL',
-    ])
-    subcommands.extend([
-        'icon = pkgwat.subcommands:Icon',
-    ])
-
-from pkgwat import (
+from pkgwat.api import (
     __name__,
     __version__,
     __description__,
@@ -80,16 +59,10 @@ setup(
     install_requires=requires,
     tests_require=[
         'nose',
-        'mock',
     ],
     test_suite='nose.collector',
-    packages=['pkgwat'],
+    packages=['pkgwat', 'pkgwat.api'],
+    namespace_packages = ['pkgwat'],
     include_package_data=True,
     zip_safe=False,
-    entry_points={
-        'console_scripts': [
-            'pkgwat = pkgwat.main:main'
-        ],
-        'pkgwat.subcommands': subcommands,
-    },
 )
