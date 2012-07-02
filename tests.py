@@ -116,5 +116,6 @@ class APItests(unittest.TestCase):
         self.assertEqual(guake_updates['rows'][0]['package_name'], PKG)
 
 
-SUITE = unittest.TestLoader().loadTestsFromTestCase(APItests)
-unittest.TextTestRunner(verbosity=2).run(SUITE)
+if __name__ == '__main__':
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(APItests)
+    unittest.TextTestRunner(verbosity=2).run(SUITE)
