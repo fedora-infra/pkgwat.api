@@ -1,9 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
 """ Basic unit-tests for the pkgwat API. """
 
 import unittest
+import six
 from pkgwat.api.api import (bugs, builds, changelog, contents, releases,
                             search, updates)
 
@@ -12,6 +13,11 @@ PKG = 'guake'
 
 class APItests(unittest.TestCase):
     """ Unit-tests for the pkgwat API. """
+
+    def assert_keys_in_dict(self, d, expected):
+        """ Utility for comparing dict keys. """
+        assert(all([key in d for key in expected]))
+        assert(all([key in expected for key in d]))
 
     def test_bugs(self):
         """ Test the bugs function from the API. """
@@ -40,24 +46,36 @@ class APItests(unittest.TestCase):
         """ Test the changelog function from the API. """
         guake_changelog = changelog(PKG)
         self.assertTrue(len(guake_changelog['rows']) > 0)
-        expected_keys = [u'display_date', u'author', u'text',
-            u'date_ts', u'version', u'date', u'email']
-        self.assertEqual(guake_changelog['rows'][0].keys(), expected_keys)
+        expected_keys = [six.u(key) for key in [
+            'display_date',
+            'author',
+            'text',
+            'date_ts',
+            'version',
+            'date',
+            'email',
+        ]]
+        self.assert_keys_in_dict(guake_changelog['rows'][0], expected_keys)
 
     def test_contents(self):
         """ Test the contents function from the API. """
         guake_contents = contents(PKG)
-        expected_keys = [u'state', u'data', u'children']
-        self.assertEqual(guake_contents[0].keys(), expected_keys)
+        expected_keys = [six.u('state'), six.u('data'), six.u('children')]
+        self.assert_keys_in_dict(guake_contents[0], expected_keys)
         self.assertEqual(guake_contents[0]['state'], 'open')
-        expected_data = {u'icon': u'jstree-directory', u'title': u'usr'}
+        expected_data = {
+            six.u('icon'): six.u('jstree-directory'),
+            six.u('title'): six.u('usr')
+        }
         self.assertEqual(guake_contents[0]['data'], expected_data)
 
     def test_releases(self):
         """ Test the releases function from the API. """
         guake_releases = releases(PKG)
-        expected_keys = [u'release', u'testing_version', u'stable_version']
-        self.assertEqual(guake_releases['rows'][0].keys(), expected_keys)
+        expected_keys = [six.u(key) for key in [
+            'release', 'testing_version', 'stable_version'
+        ]]
+        self.assert_keys_in_dict(guake_releases['rows'][0], expected_keys)
         self.assertEqual(guake_releases['rows'][0]['release'], 'Rawhide')
 
     def test_search(self):
@@ -72,13 +90,27 @@ class APItests(unittest.TestCase):
     def test_updates(self):
         """ Test the updates function of the API. """
         guake_updates = updates(PKG)
-        expected_keys = [u'status', u'date_pushed', u'name',
-            u'package_name', u'title', u'versions', u'actions',
-            u'date_submitted_display', u'karma_str', u'dist_updates',
-            u'releases', u'details', u'request_id',
-            u'date_pushed_display', u'karma_level', u'id', u'nvr']
+        expected_keys = [six.u(key) for key in [
+            'status',
+            'date_pushed',
+            'name',
+            'package_name',
+            'title',
+            'versions',
+            'actions',
+            'date_submitted_display',
+            'karma_str',
+            'dist_updates',
+            'releases',
+            'details',
+            'request_id',
+            'date_pushed_display',
+            'karma_level',
+            'id',
+            'nvr',
+        ]]
 
-        self.assertEqual(guake_updates['rows'][0].keys(), expected_keys)
+        self.assert_keys_in_dict(guake_updates['rows'][0], expected_keys)
         self.assertEqual(guake_updates['rows'][0]['name'], PKG)
         self.assertTrue(guake_updates['rows'][0]['title'].startswith(PKG))
         self.assertEqual(guake_updates['rows'][0]['package_name'], PKG)

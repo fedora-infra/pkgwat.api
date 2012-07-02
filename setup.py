@@ -59,7 +59,6 @@ setup(
     install_requires=requires,
     tests_require=[
         'nose',
-        'mock',
     ],
     test_suite='nose.collector',
     packages=['pkgwat', 'pkgwat.api'],
