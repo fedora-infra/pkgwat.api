@@ -28,15 +28,12 @@ requires = [
 ]
 
 
-from pkgwat.api import (
-    __name__,
-    __version__,
-    __description__,
-    __author__,
-    __author_email__,
-    __url__,
-)
-
+__name__ = 'pkgwat.api'
+__version__ = "0.3"
+__description__ = "Python API for querying the fedora packages webapp"
+__author__ = "Ralph Bean"
+__author_email__ = "rbean@redhat.com"
+__url__ = "http://github.com/ralphbean/pkgwat.api"
 
 setup(
     name=__name__,

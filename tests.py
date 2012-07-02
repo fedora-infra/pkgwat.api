@@ -5,8 +5,8 @@
 
 import unittest
 import six
-from pkgwat.api.api import (bugs, builds, changelog, contents, releases,
-                            search, updates)
+from pkgwat.api import (bugs, builds, changelog, contents, releases,
+                        search, updates)
 
 PKG = 'guake'
 
