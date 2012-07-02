@@ -16,8 +16,8 @@ class APItests(unittest.TestCase):
 
     def assert_keys_in_dict(self, d, expected):
         """ Utility for comparing dict keys. """
-        assert(all([key in d for key in expected]))
-        assert(all([key in expected for key in d]))
+        self.assertTrue(all([key in d for key in expected]))
+        self.assertTrue(all([key in expected for key in d]))
 
     def test_bugs(self):
         """ Test the bugs function from the API. """
