@@ -5,8 +5,8 @@
 
 import unittest
 import six
-from pkgwat.api.api import (bugs, builds, changelog, contents, releases,
-                            search, updates)
+from pkgwat.api import (bugs, builds, changelog, contents, releases,
+                        search, updates)
 
 PKG = 'guake'
 
@@ -16,8 +16,8 @@ class APItests(unittest.TestCase):
 
     def assert_keys_in_dict(self, d, expected):
         """ Utility for comparing dict keys. """
-        assert(all([key in d for key in expected]))
-        assert(all([key in expected for key in d]))
+        self.assertTrue(all([key in d for key in expected]))
+        self.assertTrue(all([key in expected for key in d]))
 
     def test_bugs(self):
         """ Test the bugs function from the API. """
@@ -116,5 +116,6 @@ class APItests(unittest.TestCase):
         self.assertEqual(guake_updates['rows'][0]['package_name'], PKG)
 
 
-SUITE = unittest.TestLoader().loadTestsFromTestCase(APItests)
-unittest.TextTestRunner(verbosity=2).run(SUITE)
+if __name__ == '__main__':
+    SUITE = unittest.TestLoader().loadTestsFromTestCase(APItests)
+    unittest.TextTestRunner(verbosity=2).run(SUITE)
