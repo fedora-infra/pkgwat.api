@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file is part of pkgwat.
 # Copyright (C) 2012 Red Hat, Inc.
 #
