@@ -28,7 +28,10 @@ the number of rows, paging data results, specifying releases to query against,
 etc.  If the results are problematic (or awesome), you can drop a note in
 ``#fedora-apps`` on freenode.
 
-:Author: Ralph Bean <rbean@redhat.com>, http://threebean.org
+You can find the source for this project at
+http://github.com/ralphbean/pkgwat.api
+
+:Author: Ralph Bean <rbean@redhat.com>
 
 """
 
