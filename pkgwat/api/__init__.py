@@ -24,7 +24,7 @@ package-centric way.  It was developed by `J5 <http://www.j5live.com/>`_,
 `Luke Macken <http://lewk.org>`_, and `Máirín Duffy
 <http://blog.linuxgrrl.com/>`_.
 
-In this module, almost all of the methods have a smiilar signature for limiting
+In this module, almost all of the methods have a similar signature for limiting
 the number of rows, paging data results, specifying releases to query against,
 etc.  If the results are problematic (or awesome), you can drop a note in
 ``#fedora-apps`` on freenode.
