@@ -46,9 +46,14 @@ import pkgwat.api.utils
 # TODO -- how can this be dynamically linked to setup.py?
 __version__ = "0.3"
 
-import requests.defaults
-requests.defaults.defaults['base_headers']['User-Agent'] = \
-        'pkgwat/' + __version__
+try:
+    # This only works on older versions of python-requests
+    import requests.defaults
+    requests.defaults.defaults['base_headers']['User-Agent'] = \
+            'pkgwat/' + __version__
+except ImportError:
+    # If it doesn't exist, no biggie.  But we should fix this in the future.
+    pass
 
 
 # TODO -- Tie this into cliff's verbosity options
@@ -60,7 +65,10 @@ if DEBUG_REQUESTS:
         def write(self, message):
             print("DEBUG:", message)
 
-    requests.defaults.defaults['verbose'] = myobj()
+    try:
+        requests.defaults.defaults['verbose'] = myobj()
+    except AttributeError:
+        pass
 
 
 BASE_URL = "https://apps.fedoraproject.org/packages/fcomm_connector"
