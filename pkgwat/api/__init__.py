@@ -129,7 +129,10 @@ def _make_request(path, query, strip_tags):
     query_as_json = json.dumps(query)
     url = "/".join([BASE_URL, path, query_as_json])
     response = requests.get(url)
-    d = json.loads(response.text)
+    d = response.json
+
+    if callable(d):
+        d = d()
 
     if strip_tags:
         d = pkgwat.api.utils.strip_tags(d)
@@ -505,6 +508,11 @@ def contents(package, arch="x86_64", release="Rawhide", strip_tags=True):
     url = "/".join([BASE_URL, path])
     response = requests.get(url, params=query)
     d = response.json
+
+    # In newer versions of python-requests, response.json is a method and must
+    # be invoked.  In older versions, it was just an attribute to be accessed.
+    if callable(d):
+        d = d()
 
     if strip_tags:
         d = pkgwat.api.utils.strip_tags(d)
