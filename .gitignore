@@ -6,3 +6,4 @@ dist
 *.egg*
 README.pdf
 *.log*
+htmldoc
