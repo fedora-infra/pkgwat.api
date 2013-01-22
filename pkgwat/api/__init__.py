@@ -44,7 +44,7 @@ import pkgwat.api
 import pkgwat.api.utils
 
 # TODO -- how can this be dynamically linked to setup.py?
-__version__ = "0.4"
+__version__ = "0.5"
 
 try:
     # This only works on older versions of python-requests

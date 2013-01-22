@@ -29,7 +29,7 @@ requires = [
 
 
 __name__ = 'pkgwat.api'
-__version__ = "0.4"
+__version__ = "0.5"
 __description__ = "Python API for querying the fedora packages webapp"
 __author__ = "Ralph Bean"
 __author_email__ = "rbean@redhat.com"
