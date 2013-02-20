@@ -562,3 +562,42 @@ def changelog(package, rows_per_page=10, start_row=0, strip_tags=True):
     }
 
     return _make_request(path, query, strip_tags)
+
+def dependencies(package, arch="noarch", release="Rawhide", version=None,
+                 rows_per_page=10, start_row=0, strip_tags=True):
+    """ Returns the changelog of a package.
+
+    :view: https://apps.fedoraproject.org/packages/vim/relationships/requires/
+
+    >>> import pkgwat.api
+    >>> pkgwat.api.dependencies("vim", rows_per_page=2)
+
+    The above will return the deps of a package.. something like::
+
+        TODO -- add this example.
+
+    """
+
+    if not version:
+        rels = releases(package)['rows']
+        relevant_releases = [r for r in rels if r['release'] == release]
+        if not relevant_releases:
+            return []
+
+        version = relevant_releases[0]['stable_version']
+        if version == u'None':
+            version = relevant_releases[0]['testing_version']
+
+    path = "yum/query/query_requires"
+    query = {
+        "filters": {
+            "package": package,
+            "repo": release,
+            "arch": arch,
+            "version": version,
+        },
+        "rows_per_page": rows_per_page,
+        "start_row": start_row,
+    }
+
+    return _make_request(path, query, strip_tags)
