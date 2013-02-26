@@ -565,17 +565,44 @@ def changelog(package, rows_per_page=10, start_row=0, strip_tags=True):
 
 def dependencies(package, arch="noarch", release="Rawhide", version=None,
                  rows_per_page=10, start_row=0, strip_tags=True):
-    """ Returns the changelog of a package.
+    """ Returns the packages that depend on a given package.
 
-    :view: https://apps.fedoraproject.org/packages/vim/relationships/requires/
+    :view: https://apps.fedoraproject.org/packages/pkgwat/relationships/requires/
 
     >>> import pkgwat.api
-    >>> pkgwat.api.dependencies("vim", rows_per_page=2)
+    >>> pkgwat.api.dependencies("pkgwat")
 
     The above will return the deps of a package.. something like::
 
-        TODO -- add this example.
-
+        {u'rows': [{u'flags': None,
+                    u'name': u'python-pkgwat-api',
+                    u'ops': None,
+                    u'provided_by': [u'python-pkgwat-api'],
+                    u'version': ''},
+                {u'flags': None,
+                    u'name': u'python-fabulous',
+                    u'ops': None,
+                    u'provided_by': [u'python-fabulous'],
+                    u'version': ''},
+                {u'flags': None,
+                    u'name': u'python-cliff',
+                    u'ops': None,
+                    u'provided_by': [u'python-cliff'],
+                    u'version': ''},
+                {u'flags': u'EQ',
+                    u'name': u'python(abi)',
+                    u'ops': u'=',
+                    u'provided_by': [u'python', u'python3'],
+                    u'version': u'0-2.7'},
+                {u'flags': None,
+                    u'name': u'/usr/bin/python',
+                    u'ops': None,
+                    u'provided_by': [u'python'],
+                    u'version': ''}],
+        u'rows_per_page': 10,
+        u'start_row': 0,
+        u'total_rows': 5,
+        u'visible_rows': 5}
     """
 
     if not version:
