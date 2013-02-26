@@ -82,9 +82,9 @@ class APItests(unittest.TestCase):
         """ Test the search function of the API. """
         guake_search = search(PKG)
         self.assertEqual(guake_search['rows'][0]['upstream_url'],
-            'http://www.guake.org/')
+                         'http://www.guake.org/')
         self.assertEqual(guake_search['rows'][0]['devel_owner'],
-            'pingou')
+                         'pingou')
         self.assertEqual(guake_search['rows'][0]['link'], PKG)
 
     def test_updates(self):
