@@ -563,11 +563,12 @@ def changelog(package, rows_per_page=10, start_row=0, strip_tags=True):
 
     return _make_request(path, query, strip_tags)
 
+
 def dependencies(package, arch="noarch", release="Rawhide", version=None,
                  rows_per_page=10, start_row=0, strip_tags=True):
     """ Returns the packages that depend on a given package.
 
-    :view: https://apps.fedoraproject.org/packages/pkgwat/relationships/requires/
+    :view: https://apps.fedoraproject.org/packages/pkgwat/relationships/
 
     >>> import pkgwat.api
     >>> pkgwat.api.dependencies("pkgwat")
