@@ -5,6 +5,7 @@ from six.moves import html_parser
 
 class MLStripper(html_parser.HTMLParser):
     strict = False
+
     def __init__(self):
         self.reset()
         self.fed = []
