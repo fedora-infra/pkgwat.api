@@ -302,7 +302,7 @@ def builds(package, state='all', rows_per_page=10,
 
 
 def updates(package, release="all", status="all", rows_per_page=10,
-             start_row=0, strip_tags=True):
+            start_row=0, strip_tags=True):
     """ Retrieve a list of bodhi updates for a package.
 
     :view: https://apps.fedoraproject.org/packages/ccze/updates
