@@ -640,7 +640,7 @@ def dependants(package, arch="noarch", release="Rawhide", version=None,
     >>> import pkgwat.api
     >>> pkgwat.api.dependants("python-pkgwat-api")
 
-    The above will return the packages that depend ona package.. something
+    The above will return the packages that depend on a package.. something
     like::
 
         {u'rows': [{u'name': u'pkgwat',
