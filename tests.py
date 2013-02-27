@@ -5,8 +5,20 @@
 
 import unittest
 import six
-from pkgwat.api import (bugs, builds, changelog, contents, releases,
-                        search, updates)
+from pkgwat.api import (
+    bugs,
+    builds,
+    changelog,
+    contents,
+    releases,
+    search,
+    updates,
+    dependencies,
+    dependants,
+    provides,
+    obsoletes,
+    conflicts,
+)
 
 PKG = 'guake'
 
@@ -82,9 +94,9 @@ class APItests(unittest.TestCase):
         """ Test the search function of the API. """
         guake_search = search(PKG)
         self.assertEqual(guake_search['rows'][0]['upstream_url'],
-            'http://www.guake.org/')
+                         'http://www.guake.org/')
         self.assertEqual(guake_search['rows'][0]['devel_owner'],
-            'pingou')
+                         'pingou')
         self.assertEqual(guake_search['rows'][0]['link'], PKG)
 
     def test_updates(self):
@@ -115,6 +127,25 @@ class APItests(unittest.TestCase):
         self.assertTrue(guake_updates['rows'][0]['title'].startswith(PKG))
         self.assertEqual(guake_updates['rows'][0]['package_name'], PKG)
 
+    def test_dependencies(self):
+        pkgwat_deps = dependencies("pkgwat")
+        self.assertEqual(len(pkgwat_deps['rows']), 5)
+
+    def test_dependants(self):
+        pkgwat_dependants = dependants("python-pkgwat-api")
+        self.assertEqual(len(pkgwat_dependants['rows']), 2)
+
+    def test_provides(self):
+        guake_provides = provides(PKG, version="0.4.2-6.fc17", arch="x86_64")
+        self.assertEqual(len(guake_provides['rows']), 3)
+
+    def test_obsoletes(self):
+        guake_obsoletes = obsoletes(PKG, version="0.4.2-6.fc17", arch="x86_64")
+        self.assertEqual(len(guake_obsoletes['rows']), 0)
+
+    def test_conflicts(self):
+        guake_conflicts = conflicts(PKG, version="0.4.2-6.fc17", arch="x86_64")
+        self.assertEqual(len(guake_conflicts['rows']), 0)
 
 if __name__ == '__main__':
     SUITE = unittest.TestLoader().loadTestsFromTestCase(APItests)

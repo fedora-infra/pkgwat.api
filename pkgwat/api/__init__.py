@@ -50,7 +50,7 @@ try:
     # This only works on older versions of python-requests
     import requests.defaults
     requests.defaults.defaults['base_headers']['User-Agent'] = \
-            'pkgwat/' + __version__
+        'pkgwat/' + __version__
 except ImportError:
     # If it doesn't exist, no biggie.  But we should fix this in the future.
     pass
@@ -223,7 +223,7 @@ def releases(package, rows_per_page=10, start_row=0, strip_tags=True):
 
 
 def builds(package, state='all', rows_per_page=10,
-             start_row=0, strip_tags=True):
+           start_row=0, strip_tags=True):
     """ Retrieve a list of the latest koji builds for a package.
 
     :view: https://apps.fedoraproject.org/packages/ccze/builds
@@ -302,7 +302,7 @@ def builds(package, state='all', rows_per_page=10,
 
 
 def updates(package, release="all", status="all", rows_per_page=10,
-             start_row=0, strip_tags=True):
+            start_row=0, strip_tags=True):
     """ Retrieve a list of bodhi updates for a package.
 
     :view: https://apps.fedoraproject.org/packages/ccze/updates
@@ -561,4 +561,257 @@ def changelog(package, rows_per_page=10, start_row=0, strip_tags=True):
         "start_row": start_row,
     }
 
+    return _make_request(path, query, strip_tags)
+
+
+def dependencies(package, arch="noarch", release="Rawhide", version=None,
+                 rows_per_page=10, start_row=0, strip_tags=True):
+    """ Returns the packages that a given package depends on.
+
+    :view: https://apps.fedoraproject.org/packages/pkgwat/relationships/
+
+    >>> import pkgwat.api
+    >>> pkgwat.api.dependencies("pkgwat")
+
+    The above will return the deps of a package.. something like::
+
+        {u'rows': [{u'flags': None,
+                    u'name': u'python-pkgwat-api',
+                    u'ops': None,
+                    u'provided_by': [u'python-pkgwat-api'],
+                    u'version': ''},
+                {u'flags': None,
+                    u'name': u'python-fabulous',
+                    u'ops': None,
+                    u'provided_by': [u'python-fabulous'],
+                    u'version': ''},
+                {u'flags': None,
+                    u'name': u'python-cliff',
+                    u'ops': None,
+                    u'provided_by': [u'python-cliff'],
+                    u'version': ''},
+                {u'flags': u'EQ',
+                    u'name': u'python(abi)',
+                    u'ops': u'=',
+                    u'provided_by': [u'python', u'python3'],
+                    u'version': u'0-2.7'},
+                {u'flags': None,
+                    u'name': u'/usr/bin/python',
+                    u'ops': None,
+                    u'provided_by': [u'python'],
+                    u'version': ''}],
+        u'rows_per_page': 10,
+        u'start_row': 0,
+        u'total_rows': 5,
+        u'visible_rows': 5}
+    """
+
+    if not version:
+        rels = releases(package)['rows']
+        relevant_releases = [r for r in rels if r['release'] == release]
+        if not relevant_releases:
+            return []
+
+        version = relevant_releases[0]['stable_version']
+        if version == u'None':
+            version = relevant_releases[0]['testing_version']
+
+    path = "yum/query/query_requires"
+    query = {
+        "filters": {
+            "package": package,
+            "repo": release,
+            "arch": arch,
+            "version": version,
+        },
+        "rows_per_page": rows_per_page,
+        "start_row": start_row,
+    }
+
+    return _make_request(path, query, strip_tags)
+
+
+def dependants(package, arch="noarch", release="Rawhide", version=None,
+               rows_per_page=10, start_row=0, strip_tags=True):
+    """ Returns the packages that depend on a given package.
+
+    :view: https://apps.fedoraproject.org/packages/pkgwat/relationships/
+
+    >>> import pkgwat.api
+    >>> pkgwat.api.dependants("python-pkgwat-api")
+
+    The above will return the packages that depend on a package.. something
+    like::
+
+        {u'rows': [{u'name': u'pkgwat',
+                    u'requires': {u'flags': None,
+                                u'name': u'python-pkgwat-api',
+                                u'ops': None,
+                                u'provided_by': None,
+                                u'version': ''}},
+                {u'name': u'gnome-shell-search-fedora-packages',
+                    u'requires': {u'flags': None,
+                                u'name': u'python-pkgwat-api',
+                                u'ops': None,
+                                u'provided_by': None,
+                                u'version': ''}}],
+        u'rows_per_page': 10,
+        u'start_row': 0,
+        u'total_rows': 2,
+        u'visible_rows': 2}
+
+    """
+
+    if not version:
+        rels = releases(package)['rows']
+        relevant_releases = [r for r in rels if r['release'] == release]
+        if not relevant_releases:
+            return []
+
+        version = relevant_releases[0]['stable_version']
+        if version == u'None':
+            version = relevant_releases[0]['testing_version']
+
+    path = "yum/query/query_required_by"
+    query = {
+        "filters": {
+            "package": package,
+            "repo": release,
+            "arch": arch,
+            "version": version,
+        },
+        "rows_per_page": rows_per_page,
+        "start_row": start_row,
+    }
+
+    return _make_request(path, query, strip_tags)
+
+
+def provides(package, arch="noarch", release="Rawhide", version=None,
+             rows_per_page=10, start_row=0, strip_tags=True):
+    """ Returns that which is provided by a given package.
+
+    :view: https://apps.fedoraproject.org/packages/pkgwat/relationships/
+
+    >>> import pkgwat.api
+    >>> pkgwat.api.provides("guake", version="0.4.2-6.fc17", arch="x86_64")
+
+    The above should return something like::
+
+        {u'rows': [{u'flags': u'EQ',
+                    u'name': u'guake(x86-64)',
+                    u'ops': None,
+                    u'provided_by': None,
+                    u'version': u'0-0.4.4-8.fc19'},
+                {u'flags': u'EQ',
+                    u'name': u'guake',
+                    u'ops': None,
+                    u'provided_by': None,
+                    u'version': u'0-0.4.4-8.fc19'},
+                {u'flags': None,
+                    u'name': u'globalhotkeys.so()(64bit)',
+                    u'ops': None,
+                    u'provided_by': None,
+                    u'version': ''}],
+        u'rows_per_page': 10,
+        u'start_row': 0,
+        u'total_rows': 3,
+        u'visible_rows': 3}
+
+
+    """
+
+    if not version:
+        rels = releases(package)['rows']
+        relevant_releases = [r for r in rels if r['release'] == release]
+        if not relevant_releases:
+            return []
+
+        version = relevant_releases[0]['stable_version']
+        if version == u'None':
+            version = relevant_releases[0]['testing_version']
+
+    path = "yum/query/query_provides"
+    query = {
+        "filters": {
+            "package": package,
+            "repo": release,
+            "arch": arch,
+            "version": version,
+        },
+        "rows_per_page": rows_per_page,
+        "start_row": start_row,
+    }
+
+    return _make_request(path, query, strip_tags)
+
+
+def obsoletes(package, arch="noarch", release="Rawhide", version=None,
+              rows_per_page=10, start_row=0, strip_tags=True):
+    """ Returns that which is obsoleted by a given package.
+
+    :view: https://apps.fedoraproject.org/packages/pkgwat/relationships/
+
+    >>> import pkgwat.api
+    >>> pkgwat.api.obsoletes("guake", version="0.4.2-6.fc17", arch="x86_64")
+
+    """
+
+    if not version:
+        rels = releases(package)['rows']
+        relevant_releases = [r for r in rels if r['release'] == release]
+        if not relevant_releases:
+            return []
+
+        version = relevant_releases[0]['stable_version']
+        if version == u'None':
+            version = relevant_releases[0]['testing_version']
+
+    path = "yum/query/query_obsoletes"
+    query = {
+        "filters": {
+            "package": package,
+            "repo": release,
+            "arch": arch,
+            "version": version,
+        },
+        "rows_per_page": rows_per_page,
+        "start_row": start_row,
+    }
+
+    return _make_request(path, query, strip_tags)
+
+
+def conflicts(package, arch="noarch", release="Rawhide", version=None,
+              rows_per_page=10, start_row=0, strip_tags=True):
+    """ Returns that which is marked as "conflict" by a given package.
+
+    :view: https://apps.fedoraproject.org/packages/pkgwat/relationships/
+
+    >>> import pkgwat.api
+    >>> pkgwat.api.conflicts("guake", version="0.4.2-6.fc17", arch="x86_64")
+
+    """
+
+    if not version:
+        rels = releases(package)['rows']
+        relevant_releases = [r for r in rels if r['release'] == release]
+        if not relevant_releases:
+            return []
+
+        version = relevant_releases[0]['stable_version']
+        if version == u'None':
+            version = relevant_releases[0]['testing_version']
+
+    path = "yum/query/query_conflicts"
+    query = {
+        "filters": {
+            "package": package,
+            "repo": release,
+            "arch": arch,
+            "version": version,
+        },
+        "rows_per_page": rows_per_page,
+        "start_row": start_row,
+    }
     return _make_request(path, query, strip_tags)
