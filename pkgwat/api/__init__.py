@@ -648,7 +648,7 @@ def dependencies(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_requires"
@@ -704,7 +704,7 @@ def dependants(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_required_by"
@@ -763,7 +763,7 @@ def provides(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_provides"
@@ -799,7 +799,7 @@ def obsoletes(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_obsoletes"
@@ -835,7 +835,7 @@ def conflicts(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_conflicts"
