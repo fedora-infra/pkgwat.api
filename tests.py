@@ -5,7 +5,11 @@
 
 import unittest
 import six
+
+from nose.tools import raises
+
 from pkgwat.api import (
+    get,
     bugs,
     builds,
     changelog,
@@ -146,6 +150,20 @@ class APItests(unittest.TestCase):
     def test_conflicts(self):
         guake_conflicts = conflicts(PKG, version="0.4.2-6.fc17", arch="x86_64")
         self.assertEqual(len(guake_conflicts['rows']), 0)
+
+    def test_get(self):
+        """ Test the get function of the API. """
+        guake_hit = get(PKG)
+        self.assertEqual(guake_hit['upstream_url'],
+                         'http://www.guake.org/')
+        self.assertEqual(guake_hit['devel_owner'],
+                         'pingou')
+        self.assertEqual(guake_hit['link'], PKG)
+
+    @raises(KeyError)
+    def test_get_fail(self):
+        get("this-package-does-not-exist")
+
 
 if __name__ == '__main__':
     SUITE = unittest.TestLoader().loadTestsFromTestCase(APItests)
