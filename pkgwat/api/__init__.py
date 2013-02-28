@@ -178,6 +178,41 @@ def search(pattern, rows_per_page=10, start_row=0, strip_tags=True):
     return _make_request(path, query, strip_tags)
 
 
+def get(package):
+    """ Return metadata about a package.
+
+    Raises a KeyError if no such package can be found.
+
+    :view: https://apps.fedoraproject.org/packages/python-pkgwat-api
+
+    >>> import pkgwat.api
+    >>> pkgwat.api.get("python-pkgwat-api")
+
+    Should give something like::
+
+      {
+         u'description': u'Python API for pkgwat',
+         u'devel_owner': u'ralph',
+         u'icon': u'package_128x128',
+         u'link': u'python-pkgwat-api',
+         u'name': u'python-pkgwat-api',
+         u'sub_pkgs': [{u'description': u'Python API for pkgwat',
+             u'icon': u'package_128x128',
+             u'link': u'python3-python-pkgwat-api',
+             u'name': u'python3-python-pkgwat-api',
+             u'summary': u'Python API for querying the packages webapp'}],
+         u'summary': u'Python API for querying the packages webapp',
+         u'upstream_url': u'http://pypi.python.org/pypi/pkgwat.api'
+      }
+    """
+    results = search(package)
+    for pkg in results['rows']:
+        if pkg['name'] == package:
+            return pkg
+
+    raise KeyError("No such package %r found" % package)
+
+
 def releases(package, rows_per_page=10, start_row=0, strip_tags=True):
     """ Search for a pattern in package names, descriptions, and tags
 
