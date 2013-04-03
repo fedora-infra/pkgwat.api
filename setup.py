@@ -33,7 +33,7 @@ __version__ = "0.7"
 __description__ = "Python API for querying the fedora packages webapp"
 __author__ = "Ralph Bean"
 __author_email__ = "rbean@redhat.com"
-__url__ = "http://github.com/ralphbean/pkgwat.api"
+__url__ = "http://github.com/fedora-infra/pkgwat.api"
 
 setup(
     name=__name__,

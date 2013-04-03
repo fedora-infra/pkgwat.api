@@ -30,7 +30,7 @@ etc.  If the results are problematic (or awesome), you can drop a note in
 ``#fedora-apps`` on freenode.
 
 You can find the source for this project at
-http://github.com/ralphbean/pkgwat.api
+http://github.com/fedora-infra/pkgwat.api
 
 :Author: Ralph Bean <rbean@redhat.com>
 
