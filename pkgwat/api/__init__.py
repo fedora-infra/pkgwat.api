@@ -48,7 +48,7 @@ except ImportError:
     from ordereddict import OrderedDict
 
 # TODO -- how can this be dynamically linked to setup.py?
-__version__ = "0.5"
+__version__ = "0.8"
 
 try:
     # This only works on older versions of python-requests

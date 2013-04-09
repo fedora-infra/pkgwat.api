@@ -32,7 +32,7 @@ if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     requires.append('ordereddict')
 
 __name__ = 'pkgwat.api'
-__version__ = "0.7"
+__version__ = "0.8"
 __description__ = "Python API for querying the fedora packages webapp"
 __author__ = "Ralph Bean"
 __author_email__ = "rbean@redhat.com"
