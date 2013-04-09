@@ -27,6 +27,9 @@ requires = [
     'requests',
 ]
 
+# Python 2.6 compat
+if sys.version_info[0] == 2 and sys.version_info[1] < 7:
+    requires.append('ordereddict')
 
 __name__ = 'pkgwat.api'
 __version__ = "0.7"
@@ -48,9 +51,11 @@ setup(
         "License :: OSI Approved :: GNU Lesser General Public "
         "License v2 or later (LGPLv2+)",
         "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.2",
+        "Programming Language :: Python :: 3.3",
         "Topic :: System :: Archiving :: Packaging",
         "Development Status :: 4 - Beta",
     ],

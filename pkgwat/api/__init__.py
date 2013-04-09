@@ -36,12 +36,16 @@ http://github.com/fedora-infra/pkgwat.api
 
 """
 
-import collections
 import json
 import requests
 
 import pkgwat.api
 import pkgwat.api.utils
+
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
 
 # TODO -- how can this be dynamically linked to setup.py?
 __version__ = "0.5"
@@ -73,7 +77,7 @@ if DEBUG_REQUESTS:
 
 BASE_URL = "https://apps.fedoraproject.org/packages/fcomm_connector"
 
-koji_build_states = collections.OrderedDict((
+koji_build_states = OrderedDict((
     ('all', ''),
     ('building', '0'),
     ('success', '1'),
@@ -114,7 +118,7 @@ yum_arches = [
     'i686',
 ]
 
-bugzilla_releases = collections.OrderedDict((
+bugzilla_releases = OrderedDict((
     ('all', ''),
     ('f17', '17'),
     ('f16', '16'),
