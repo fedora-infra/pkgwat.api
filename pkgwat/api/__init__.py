@@ -30,21 +30,25 @@ etc.  If the results are problematic (or awesome), you can drop a note in
 ``#fedora-apps`` on freenode.
 
 You can find the source for this project at
-http://github.com/ralphbean/pkgwat.api
+http://github.com/fedora-infra/pkgwat.api
 
 :Author: Ralph Bean <rbean@redhat.com>
 
 """
 
-import collections
 import json
 import requests
 
 import pkgwat.api
 import pkgwat.api.utils
 
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
+
 # TODO -- how can this be dynamically linked to setup.py?
-__version__ = "0.5"
+__version__ = "0.8"
 
 try:
     # This only works on older versions of python-requests
@@ -73,7 +77,7 @@ if DEBUG_REQUESTS:
 
 BASE_URL = "https://apps.fedoraproject.org/packages/fcomm_connector"
 
-koji_build_states = collections.OrderedDict((
+koji_build_states = OrderedDict((
     ('all', ''),
     ('building', '0'),
     ('success', '1'),
@@ -114,7 +118,7 @@ yum_arches = [
     'i686',
 ]
 
-bugzilla_releases = collections.OrderedDict((
+bugzilla_releases = OrderedDict((
     ('all', ''),
     ('f17', '17'),
     ('f16', '16'),
@@ -648,7 +652,7 @@ def dependencies(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_requires"
@@ -704,7 +708,7 @@ def dependants(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_required_by"
@@ -763,7 +767,7 @@ def provides(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_provides"
@@ -799,7 +803,7 @@ def obsoletes(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_obsoletes"
@@ -835,7 +839,7 @@ def conflicts(package, arch="noarch", release="Rawhide", version=None,
             return []
 
         version = relevant_releases[0]['stable_version']
-        if version == u'None':
+        if version == 'None':
             version = relevant_releases[0]['testing_version']
 
     path = "yum/query/query_conflicts"
