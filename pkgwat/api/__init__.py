@@ -211,8 +211,13 @@ def get(package):
     """
     results = search(package)
     for pkg in results['rows']:
+
         if pkg['name'] == package:
             return pkg
+
+        for subpkg in pkg['sub_pkgs']:
+            if subpkg['name'] == package:
+                return subpkg
 
     raise KeyError("No such package %r found" % package)
 
