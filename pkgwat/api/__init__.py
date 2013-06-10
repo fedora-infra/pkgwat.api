@@ -219,6 +219,9 @@ def get(package):
             if subpkg['name'] == package:
                 return subpkg
 
+    if len(results['rows']) > 0:
+        raise KeyError("Exact package name not found. Some hits are close.")
+
     raise KeyError("No such package %r found" % package)
 
 
