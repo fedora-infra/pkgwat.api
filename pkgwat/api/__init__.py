@@ -859,6 +859,19 @@ def conflicts(package, arch="noarch", release="Rawhide", version=None,
 
 def history(package, categories=None, order="desc",
             rows_per_page=10, page=1, strip_tags=True):
+    """ Returns a truncated history of fedmsg messages regarding the package.
+
+    Unlike all the other function in this module that query the
+    fedora-packages API, this function queries the datagrepper API at
+    https://apps.fedoraproject.org/datagrepper/.  It is here for convenience
+    purposes.
+
+    :view: https://apps.fedoraproject.org/datagrepper/
+
+    >>> import pkgwat.api
+    >>> pkgwat.api.history("guake", categories=["bodhi"])
+    """
+
     url = "https://apps.fedoraproject.org/datagrepper/raw/"
     categories = categories or []
     response = requests.get(
