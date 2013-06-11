@@ -36,6 +36,7 @@ http://github.com/fedora-infra/pkgwat.api
 
 """
 
+import time
 import json
 import requests
 
@@ -854,3 +855,22 @@ def conflicts(package, arch="noarch", release="Rawhide", version=None,
         "start_row": start_row,
     }
     return _make_request(path, query, strip_tags)
+
+
+def history(package, categories=None, order="desc",
+            rows_per_page=10, page=1, strip_tags=True):
+    url = "https://apps.fedoraproject.org/datagrepper/raw/"
+    categories = categories or []
+    response = requests.get(
+        url,
+        params=dict(
+            package=package,
+            start=1, end=time.time(),
+            meta=['subtitle', 'link'],
+            category=categories,
+            rows_per_page=rows_per_page,
+            page=page,
+            order=order,
+        ),
+    )
+    return response.json()
