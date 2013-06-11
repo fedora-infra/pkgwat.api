@@ -22,6 +22,7 @@ from pkgwat.api import (
     provides,
     obsoletes,
     conflicts,
+    history,
 )
 
 PKG = 'guake'
@@ -159,6 +160,11 @@ class APItests(unittest.TestCase):
         self.assertEqual(guake_hit['devel_owner'],
                          'pingou')
         self.assertEqual(guake_hit['link'], PKG)
+
+    def test_history(self):
+        """ Test the history function of the API. """
+        results = history(PKG)
+        assert len(results['raw_messages']) > 0
 
     @raises(KeyError)
     def test_get_fail(self):

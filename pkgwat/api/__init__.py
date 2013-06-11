@@ -36,6 +36,7 @@ http://github.com/fedora-infra/pkgwat.api
 
 """
 
+import time
 import json
 import requests
 
@@ -211,8 +212,16 @@ def get(package):
     """
     results = search(package)
     for pkg in results['rows']:
+
         if pkg['name'] == package:
             return pkg
+
+        for subpkg in pkg['sub_pkgs']:
+            if subpkg['name'] == package:
+                return subpkg
+
+    if len(results['rows']) > 0:
+        raise KeyError("Exact package name not found. Some hits are close.")
 
     raise KeyError("No such package %r found" % package)
 
@@ -854,3 +863,35 @@ def conflicts(package, arch="noarch", release="Rawhide", version=None,
         "start_row": start_row,
     }
     return _make_request(path, query, strip_tags)
+
+
+def history(package, categories=None, order="desc",
+            rows_per_page=10, page=1, strip_tags=True):
+    """ Returns a truncated history of fedmsg messages regarding the package.
+
+    Unlike all the other function in this module that query the
+    fedora-packages API, this function queries the datagrepper API at
+    https://apps.fedoraproject.org/datagrepper/.  It is here for convenience
+    purposes.
+
+    :view: https://apps.fedoraproject.org/datagrepper/
+
+    >>> import pkgwat.api
+    >>> pkgwat.api.history("guake", categories=["bodhi"])
+    """
+
+    url = "https://apps.fedoraproject.org/datagrepper/raw/"
+    categories = categories or []
+    response = requests.get(
+        url,
+        params=dict(
+            package=package,
+            start=1, end=time.time(),
+            meta=['subtitle', 'link'],
+            category=categories,
+            rows_per_page=rows_per_page,
+            page=page,
+            order=order,
+        ),
+    )
+    return response.json()
