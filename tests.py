@@ -6,7 +6,7 @@
 import unittest
 import six
 
-from nose.tools import raises
+from nose.tools import raises, eq_
 
 from pkgwat.api import (
     get,
@@ -24,6 +24,8 @@ from pkgwat.api import (
     conflicts,
     history,
 )
+
+import pkgwat.api.utils
 
 PKG = 'guake'
 
@@ -169,6 +171,18 @@ class APItests(unittest.TestCase):
     @raises(KeyError)
     def test_get_fail(self):
         get("this-package-does-not-exist")
+
+    def test_strip_together(self):
+        string = six.u("Levio<em>sa</em>")
+        target = six.u("Leviosa")
+        actual = pkgwat.api.utils.strip_tags(string)
+        eq_(target, actual)
+
+    def test_strip_separate(self):
+        string = six.u("I <em>told</em> you so!")
+        target = six.u("I told you so!")
+        actual = pkgwat.api.utils.strip_tags(string)
+        eq_(target, actual)
 
 
 if __name__ == '__main__':
