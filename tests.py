@@ -184,6 +184,12 @@ class APItests(unittest.TestCase):
         actual = pkgwat.api.utils.strip_tags(string)
         eq_(target, actual)
 
+    def test_strip_beginning(self):
+        string = six.u('<a href="http:/..">fedora-tagger</a> is great')
+        target = six.u('fedora-tagger is great')
+        actual = pkgwat.api.utils.strip_tags(string)
+        eq_(target, actual)
+
 
 if __name__ == '__main__':
     SUITE = unittest.TestLoader().loadTestsFromTestCase(APItests)
