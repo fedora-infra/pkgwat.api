@@ -14,7 +14,7 @@ class MLStripper(html_parser.HTMLParser):
         self.fed.append(d)
 
     def get_data(self):
-        return ' '.join([item.strip() for item in self.fed])
+        return ''.join([item for item in self.fed])
 
 
 def strip_tags(d):
