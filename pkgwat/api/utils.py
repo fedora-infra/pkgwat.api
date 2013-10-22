@@ -14,7 +14,7 @@ class MLStripper(html_parser.HTMLParser):
         self.fed.append(d)
 
     def get_data(self):
-        return ' '.join([item.strip() for item in self.fed])
+        return ''.join([item for item in self.fed])
 
 
 def strip_tags(d):
@@ -28,7 +28,11 @@ def strip_tags(d):
 
     if isinstance(d, six.text_type):
         s = MLStripper()
-        s.feed(d)
-        return s.get_data()
+        try:
+            s.feed(d)
+        except html_parser.HTMLParseError:
+            return d.decode('unicode-escape')
+        else:
+            return s.get_data().decode('unicode-escape')
 
     return d

@@ -31,21 +31,21 @@ requires = [
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     requires.append('ordereddict')
 
-__name__ = 'pkgwat.api'
-__version__ = "0.9"
-__description__ = "Python API for querying the fedora packages webapp"
-__author__ = "Ralph Bean"
-__author_email__ = "rbean@redhat.com"
-__url__ = "http://github.com/fedora-infra/pkgwat.api"
+version = '0.10'
+name = 'pkgwat.api'
+description = "Python API for querying the fedora packages webapp"
+author = "Ralph Bean"
+author_email = "rbean@redhat.com"
+url = "http://github.com/fedora-infra/pkgwat.api"
 
 setup(
-    name=__name__,
-    version=__version__,
-    description=__description__,
+    name=name,
+    version=version,
+    description=description,
     long_description=long_description,
-    author=__author__,
-    author_email=__author_email__,
-    url=__url__,
+    author=author,
+    author_email=author_email,
+    url=url,
     license='LGPLv2+',
     classifiers=[
         "License :: OSI Approved :: GNU Lesser General Public "
