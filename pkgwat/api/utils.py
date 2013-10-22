@@ -28,7 +28,11 @@ def strip_tags(d):
 
     if isinstance(d, six.text_type):
         s = MLStripper()
-        s.feed(d)
-        return s.get_data().decode('unicode-escape')
+        try:
+            s.feed(d)
+        except html_parser.HTMLParseError:
+            return d.decode('unicode-escape')
+        else:
+            return s.get_data().decode('unicode-escape')
 
     return d
