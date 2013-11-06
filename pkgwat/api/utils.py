@@ -2,6 +2,7 @@ import six
 
 from six.moves import html_parser
 
+from kitchen.text.converters import to_unicode
 
 class MLStripper(html_parser.HTMLParser):
     strict = False
@@ -31,8 +32,8 @@ def strip_tags(d):
         try:
             s.feed(d)
         except html_parser.HTMLParseError:
-            return d.decode('unicode-escape')
+            return d
         else:
-            return s.get_data().decode('unicode-escape')
+            return to_unicode(s.get_data())
 
     return d
