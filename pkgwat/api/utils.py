@@ -4,6 +4,7 @@ from six.moves import html_parser
 
 from kitchen.text.converters import to_unicode
 
+
 class MLStripper(html_parser.HTMLParser):
     strict = False
 

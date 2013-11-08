@@ -25,6 +25,7 @@ except ImportError:
 requires = [
     'six',  # For python3 support
     'requests',
+    'kitchen',
 ]
 
 # Python 2.6 compat
