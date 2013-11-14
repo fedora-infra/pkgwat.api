@@ -144,7 +144,7 @@ class APItests(unittest.TestCase):
 
     def test_provides(self):
         guake_provides = provides(PKG, version="0.4.2-6.fc17", arch="x86_64")
-        self.assertEqual(len(guake_provides['rows']), 3)
+        self.assertEqual(len(guake_provides['rows']), 2)
 
     def test_obsoletes(self):
         guake_obsoletes = obsoletes(PKG, version="0.4.2-6.fc17", arch="x86_64")
