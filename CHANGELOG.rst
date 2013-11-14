@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.11
+0.12
 ----
 
 - Add failing tests for tag stripping. `0ab263ba5 <https://github.com/fedora-infra/pkgwat.api/commit/0ab263ba527c9d46e8541278752cf6812693d169>`_
@@ -19,6 +19,10 @@ Changelog
 - Add kitchen to the requires list.  From #17. `d0fffd8ae <https://github.com/fedora-infra/pkgwat.api/commit/d0fffd8ae562444b31f31c06c4ca296c1435a807>`_
 - PEP8/cosmetic. `851424586 <https://github.com/fedora-infra/pkgwat.api/commit/851424586e2821fbda7fea05a736f3785447bfe5>`_
 - Merge pull request #18 from fedora-infra/feature/cleanup `18c25c073 <https://github.com/fedora-infra/pkgwat.api/commit/18c25c073f347b78516ed22ea2ab2a2ddbf2b9dc>`_
+- 0.11 `bc2fae367 <https://github.com/fedora-infra/pkgwat.api/commit/bc2fae3673d220aa799fde1815c719abd12df052>`_
+- Temporarily remove dep on kitchen until py3 support can be sorted out. `0f4d864c4 <https://github.com/fedora-infra/pkgwat.api/commit/0f4d864c474280143d437982c8e97b0adc6f25d1>`_
+- Guake actually only provides 2 things I guess. `cf0ce50a8 <https://github.com/fedora-infra/pkgwat.api/commit/cf0ce50a801ee0d58b53f45b8a1910dd17e40d75>`_
+- Merge pull request #19 from fedora-infra/feature/nix-kitchen `d9be9c268 <https://github.com/fedora-infra/pkgwat.api/commit/d9be9c268b1de21874db6b49941e83f42f4a1662>`_
 
 0.9
 ---
@@ -111,3 +115,18 @@ Changelog
 - Merge pull request #16 from fedora-infra/feature/py2.6-html_parser-fix `e979a0293 <https://github.com/fedora-infra/pkgwat.api/commit/e979a029308cc9a8a94def7333d754d5c5887c5f>`_
 - Remove unnecessary markup. `581b7dd4e <https://github.com/fedora-infra/pkgwat.api/commit/581b7dd4e24801b8865e7239d70a644808a14833>`_
 - Quotes. `ec25d0de1 <https://github.com/fedora-infra/pkgwat.api/commit/ec25d0de171ab426a0232281dcb763c80fd7425d>`_
+- 0.10 `f57675999 <https://github.com/fedora-infra/pkgwat.api/commit/f576759992ea6b3e46a286838a52eb699d622c87>`_
+- ascii codec cant encode character `f4235e06e <https://github.com/fedora-infra/pkgwat.api/commit/f4235e06e66331d6828bfcd3b33c584c29c7294e>`_
+- Merge pull request #17 from arielb2/bug-utf `8acb9bb21 <https://github.com/fedora-infra/pkgwat.api/commit/8acb9bb21688cbe585ba8e2d6ee36a73c5865c48>`_
+- Add kitchen to the requires list.  From #17. `d0fffd8ae <https://github.com/fedora-infra/pkgwat.api/commit/d0fffd8ae562444b31f31c06c4ca296c1435a807>`_
+- PEP8/cosmetic. `851424586 <https://github.com/fedora-infra/pkgwat.api/commit/851424586e2821fbda7fea05a736f3785447bfe5>`_
+- Merge pull request #18 from fedora-infra/feature/cleanup `18c25c073 <https://github.com/fedora-infra/pkgwat.api/commit/18c25c073f347b78516ed22ea2ab2a2ddbf2b9dc>`_
+
+0.11
+----
+
+- ascii codec cant encode character `f4235e06e <https://github.com/fedora-infra/pkgwat.api/commit/f4235e06e66331d6828bfcd3b33c584c29c7294e>`_
+- Merge pull request #17 from arielb2/bug-utf `8acb9bb21 <https://github.com/fedora-infra/pkgwat.api/commit/8acb9bb21688cbe585ba8e2d6ee36a73c5865c48>`_
+- Add kitchen to the requires list.  From #17. `d0fffd8ae <https://github.com/fedora-infra/pkgwat.api/commit/d0fffd8ae562444b31f31c06c4ca296c1435a807>`_
+- PEP8/cosmetic. `851424586 <https://github.com/fedora-infra/pkgwat.api/commit/851424586e2821fbda7fea05a736f3785447bfe5>`_
+- Merge pull request #18 from fedora-infra/feature/cleanup `18c25c073 <https://github.com/fedora-infra/pkgwat.api/commit/18c25c073f347b78516ed22ea2ab2a2ddbf2b9dc>`_
