@@ -25,14 +25,13 @@ except ImportError:
 requires = [
     'six',  # For python3 support
     'requests',
-    'kitchen',
 ]
 
 # Python 2.6 compat
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     requires.append('ordereddict')
 
-version = '0.11'
+version = '0.12'
 name = 'pkgwat.api'
 description = "Python API for querying the fedora packages webapp"
 author = "Ralph Bean"
