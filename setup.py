@@ -32,7 +32,7 @@ requires = [
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     requires.append('ordereddict')
 
-version = '0.10'
+version = '0.11'
 name = 'pkgwat.api'
 description = "Python API for querying the fedora packages webapp"
 author = "Ralph Bean"
