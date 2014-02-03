@@ -866,7 +866,7 @@ def conflicts(package, arch="noarch", release="Rawhide", version=None,
 
 
 def history(package, categories=None, order="desc",
-            rows_per_page=10, page=1, strip_tags=True):
+            rows_per_page=10, page=1):
     """ Returns a truncated history of fedmsg messages regarding the package.
 
     Unlike all the other function in this module that query the
