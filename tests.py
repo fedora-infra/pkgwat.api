@@ -67,13 +67,14 @@ class APItests(unittest.TestCase):
         self.assertTrue(len(guake_changelog['rows']) > 0)
         expected_keys = [six.u(key) for key in [
             'display_date',
-            'author',
+            'changelog',
             'text',
-            'date_ts',
+            'author',
             'version',
             'date',
             'email',
         ]]
+        print(guake_changelog['rows'][0])
         self.assert_keys_in_dict(guake_changelog['rows'][0], expected_keys)
 
     def test_contents(self):

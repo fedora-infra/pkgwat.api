@@ -599,6 +599,7 @@ def changelog(package, rows_per_page=10, start_row=0, strip_tags=True):
     query = {
         "filters": {
             "build_id": build_id,
+            "package_name": package,
         },
         "rows_per_page": rows_per_page,
         "start_row": start_row,
