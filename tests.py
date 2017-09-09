@@ -49,7 +49,7 @@ class APItests(unittest.TestCase):
         """ Test the builds function from the API. """
         guake_build = builds(PKG, state='all')
         self.assertEqual(guake_build['rows'][0]['package_name'], PKG)
-        self.assertEqual(guake_build['rows'][0]['owner_name'], 'pingou')
+        self.assertEqual(guake_build['rows'][0]['owner_name'], 'releng')
         self.assertEqual(guake_build['rows'][0]['package_id'], 6454)
 
     def test_builds_completed(self):
@@ -59,7 +59,7 @@ class APItests(unittest.TestCase):
         guake_build = builds(PKG, state='1')
         self.assertEqual(guake_build['rows'][0]['state_str'], 'complete')
         self.assertEqual(guake_build['rows'][0]['package_id'], 6454)
-        self.assertEqual(guake_build['rows'][0]['owner_name'], 'pingou')
+        self.assertEqual(guake_build['rows'][0]['owner_name'], 'releng')
 
     def test_changelog(self):
         """ Test the changelog function from the API. """
@@ -74,7 +74,6 @@ class APItests(unittest.TestCase):
             'date',
             'email',
         ]]
-        print(guake_changelog['rows'][0])
         self.assert_keys_in_dict(guake_changelog['rows'][0], expected_keys)
 
     def test_contents(self):
