@@ -531,7 +531,7 @@ def bugs(package, release="all", rows_per_page=10,
     return _make_request(path, query, strip_tags)
 
 
-def contents(package, arch="x86_64", release="Rawhide", strip_tags=True):
+def contents(package, release="Rawhide", strip_tags=True):
     """ Returns the contents of a package.
 
     :view: https://apps.fedoraproject.org/packages/mutt/contents
@@ -543,14 +543,9 @@ def contents(package, arch="x86_64", release="Rawhide", strip_tags=True):
         raise ValueError("Invalid yum release. %r %r" % (
             release, yum_releases))
 
-    if arch not in yum_arches:
-        raise ValueError("Invalid yum arch.  %r %r" % (
-            arch, yum_arches))
-
     path = "yum/get_file_tree"
     query = {
         "package": package,
-        "arch": arch,
         "repo": release,
     }
     url = "/".join([BASE_URL, path])
