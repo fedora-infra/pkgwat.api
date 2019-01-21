@@ -7,3 +7,4 @@ dist
 README.pdf
 *.log*
 htmldoc
+.tox

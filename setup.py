@@ -61,9 +61,9 @@ setup(
     ],
     install_requires=requires,
     tests_require=[
-        'nose',
+        'pytest',
     ],
-    test_suite='nose.collector',
+    test_suite='py.test',
     packages=['pkgwat', 'pkgwat.api'],
     namespace_packages=['pkgwat'],
     include_package_data=True,
