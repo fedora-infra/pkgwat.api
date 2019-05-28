@@ -3,10 +3,11 @@ import six
 from six.moves import html_parser
 
 
-class MLStripper(html_parser.HTMLParser):
+class MLStripper(html_parser.HTMLParser, object):
     strict = False
 
     def __init__(self):
+        super(MLStripper, self).__init__()
         self.reset()
         self.fed = []
 
