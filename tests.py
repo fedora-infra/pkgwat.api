@@ -101,7 +101,7 @@ class APItests(unittest.TestCase):
         """ Test the search function of the API. """
         guake_search = search(PKG)
         self.assertEqual(guake_search['rows'][0]['upstream_url'],
-                         'http://www.guake.org/')
+                         'http://guake-project.org/')
         self.assertEqual(guake_search['rows'][0]['devel_owner'],
                          'pingou')
         self.assertEqual(guake_search['rows'][0]['link'], PKG)
@@ -163,7 +163,7 @@ class APItests(unittest.TestCase):
         """ Test the get function of the API. """
         guake_hit = get(PKG)
         self.assertEqual(guake_hit['upstream_url'],
-                         'http://www.guake.org/')
+                         'http://guake-project.org/')
         self.assertEqual(guake_hit['devel_owner'],
                          'pingou')
         self.assertEqual(guake_hit['link'], PKG)
