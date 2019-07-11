@@ -1,6 +1,25 @@
 Changelog
 =========
 
+0.13
+----
+
+- Merge branch 'release/0.12' into develop `0fad55f <https://github.com/fedora-infra/pkgwat.api/commit/0fad55fb785cf8192441a0b36e95b6b9823ca9d7>`_
+- nuke strip_tags in history() `1ae25c4 <https://github.com/fedora-infra/pkgwat.api/commit/1ae25c40e17e453ecfbf1f0358f0858316b0e7a2>`_
+- Remove these deprecated functions as per #22. `b0e39cd <https://github.com/fedora-infra/pkgwat.api/commit/b0e39cd5ec491f2984d3cd87d3352579f9d4d679>`_
+- Merge pull request #24 from fedora-infra/feature/remove-relationships `9189cde <https://github.com/fedora-infra/pkgwat.api/commit/9189cde0b3b591cc38815e2c56a10ba17b88e737>`_
+- Remove the arch parameter since it is not supported by fedora-packages `b861a08 <https://github.com/fedora-infra/pkgwat.api/commit/b861a08094264ff823d2ba566f6166be832ec883>`_
+- Add package_name to the changelog filters as it is expected by fedora-packages `c894505 <https://github.com/fedora-infra/pkgwat.api/commit/c8945059887fd3aa24546d66dbec2bb84ed5eaf5>`_
+- The last owner of guake builds was releng not pingou `5951e82 <https://github.com/fedora-infra/pkgwat.api/commit/5951e82e4549eab0e7ec38c7841ec88b0de64086>`_
+- Add support for tox test `1f5df9e <https://github.com/fedora-infra/pkgwat.api/commit/1f5df9efab7c9748ebbeca7b103e51c5e9006b0a>`_
+- Add .cico.pipeline `166a935 <https://github.com/fedora-infra/pkgwat.api/commit/166a935d69708701fe047a17d0daad2c732c9a8c>`_
+- Pass HOME env to tox runner `3c43c15 <https://github.com/fedora-infra/pkgwat.api/commit/3c43c15c670cfe8c201be7b10b3ed8e343b54f1a>`_
+- fix parser crash `0807919 <https://github.com/fedora-infra/pkgwat.api/commit/0807919401911e68e1a872e1325e952d74e597ac>`_
+- tests: update guake homepage `1235015 <https://github.com/fedora-infra/pkgwat.api/commit/12350153eff7dfd6a508309ec160b66d42439525>`_
+- fix tox to run tests `4d3f233 <https://github.com/fedora-infra/pkgwat.api/commit/4d3f233af8d89995fd376985a2d2716a1ae334be>`_
+- readme: add instructions to set up devenv and run tests `87d23e4 <https://github.com/fedora-infra/pkgwat.api/commit/87d23e48b54c9c5f8fbc492a77a5f004bb8da667>`_
+- changelog: fix last releases merged together `8e7f10e <https://github.com/fedora-infra/pkgwat.api/commit/8e7f10efcd2e84c1e04eeb3d7bf154e19e7ed6b6>`_
+
 0.12
 ----
 
