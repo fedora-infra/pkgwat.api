@@ -31,7 +31,7 @@ requires = [
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     requires.append('ordereddict')
 
-version = '0.12'
+version = '0.13'
 name = 'pkgwat.api'
 description = "Python API for querying the fedora packages webapp"
 author = "Ralph Bean"
@@ -61,9 +61,9 @@ setup(
     ],
     install_requires=requires,
     tests_require=[
-        'nose',
+        'pytest',
     ],
-    test_suite='nose.collector',
+    test_suite='py.test',
     packages=['pkgwat', 'pkgwat.api'],
     namespace_packages=['pkgwat'],
     include_package_data=True,

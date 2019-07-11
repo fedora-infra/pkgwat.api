@@ -49,7 +49,7 @@ class APItests(unittest.TestCase):
         """ Test the builds function from the API. """
         guake_build = builds(PKG, state='all')
         self.assertEqual(guake_build['rows'][0]['package_name'], PKG)
-        self.assertEqual(guake_build['rows'][0]['owner_name'], 'pingou')
+        self.assertEqual(guake_build['rows'][0]['owner_name'], 'releng')
         self.assertEqual(guake_build['rows'][0]['package_id'], 6454)
 
     def test_builds_completed(self):
@@ -59,7 +59,7 @@ class APItests(unittest.TestCase):
         guake_build = builds(PKG, state='1')
         self.assertEqual(guake_build['rows'][0]['state_str'], 'complete')
         self.assertEqual(guake_build['rows'][0]['package_id'], 6454)
-        self.assertEqual(guake_build['rows'][0]['owner_name'], 'pingou')
+        self.assertEqual(guake_build['rows'][0]['owner_name'], 'releng')
 
     def test_changelog(self):
         """ Test the changelog function from the API. """
@@ -67,9 +67,9 @@ class APItests(unittest.TestCase):
         self.assertTrue(len(guake_changelog['rows']) > 0)
         expected_keys = [six.u(key) for key in [
             'display_date',
-            'author',
+            'changelog',
             'text',
-            'date_ts',
+            'author',
             'version',
             'date',
             'email',
@@ -101,7 +101,7 @@ class APItests(unittest.TestCase):
         """ Test the search function of the API. """
         guake_search = search(PKG)
         self.assertEqual(guake_search['rows'][0]['upstream_url'],
-                         'http://www.guake.org/')
+                         'http://guake-project.org/')
         self.assertEqual(guake_search['rows'][0]['devel_owner'],
                          'pingou')
         self.assertEqual(guake_search['rows'][0]['link'], PKG)
@@ -134,22 +134,27 @@ class APItests(unittest.TestCase):
         self.assertTrue(guake_updates['rows'][0]['title'].startswith(PKG))
         self.assertEqual(guake_updates['rows'][0]['package_name'], PKG)
 
+    @raises(NotImplementedError)
     def test_dependencies(self):
         pkgwat_deps = dependencies("pkgwat")
         self.assertEqual(len(pkgwat_deps['rows']), 5)
 
+    @raises(NotImplementedError)
     def test_dependants(self):
         pkgwat_dependants = dependants("python-pkgwat-api")
         self.assertEqual(len(pkgwat_dependants['rows']), 2)
 
+    @raises(NotImplementedError)
     def test_provides(self):
         guake_provides = provides(PKG, version="0.4.2-6.fc17", arch="x86_64")
         self.assertEqual(len(guake_provides['rows']), 2)
 
+    @raises(NotImplementedError)
     def test_obsoletes(self):
         guake_obsoletes = obsoletes(PKG, version="0.4.2-6.fc17", arch="x86_64")
         self.assertEqual(len(guake_obsoletes['rows']), 0)
 
+    @raises(NotImplementedError)
     def test_conflicts(self):
         guake_conflicts = conflicts(PKG, version="0.4.2-6.fc17", arch="x86_64")
         self.assertEqual(len(guake_conflicts['rows']), 0)
@@ -158,7 +163,7 @@ class APItests(unittest.TestCase):
         """ Test the get function of the API. """
         guake_hit = get(PKG)
         self.assertEqual(guake_hit['upstream_url'],
-                         'http://www.guake.org/')
+                         'http://guake-project.org/')
         self.assertEqual(guake_hit['devel_owner'],
                          'pingou')
         self.assertEqual(guake_hit['link'], PKG)
